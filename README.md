@@ -6,8 +6,9 @@ A collection of functions and utilities.
 
 ```bash
 npx jsr add @totto/function
-yarn dlx @totto/function
-pnpm dlx @totto/function
+yarn dlx jsr add @totto/function
+pnpm dlx jsr add @totto/function
+nlx jsr add @totto/function
 deno add @totto/function
 ```
 
