@@ -1,3 +1,20 @@
+/**
+ * @module
+ *
+ * Test utilities for Effect and Deno.
+ *
+ * Ignoring some Deno warnings due to test clock leaks.
+ *
+ * @example
+ * ```ts
+ * import { it } from "@totto/function/effect/test/deno";
+ *
+ * it.live(
+ *   "live",
+ *   () => Effect.sync(() => expect(1).toEqual(1)),
+ * );
+ * ```
+ */
 // deno-lint-ignore-file no-namespace
 import type {
   Duration,
@@ -11,6 +28,11 @@ import type {
 import * as internal from "./deno.internal.ts";
 import * as bdd from "../../test.ts";
 
+/**
+ * Configure global sanitizers.
+ *
+ * For TestClock leaks.
+ */
 bdd.configureGlobalSanitizers({
   sanitizeOps: false,
   sanitizeResources: false,
@@ -18,13 +40,25 @@ bdd.configureGlobalSanitizers({
 
 export * from "../../test.ts";
 
+/**
+ * API for the test runner.
+ */
 export type API = typeof bdd.test;
 
+/**
+ * EffectDenoTest namespace.
+ */
 export namespace EffectDenoTest {
+  /**
+   * Function type for tests.
+   */
   export interface TestFunction<A, E, R, TestArgs extends Array<unknown>> {
     (...args: TestArgs): Effect.Effect<A, E, R>;
   }
 
+  /**
+   * Test function type.
+   */
   export interface Test<R> {
     <A, E>(
       name: string,
@@ -33,10 +67,16 @@ export namespace EffectDenoTest {
     ): void;
   }
 
+  /**
+   * Type for arbitrary values used in tests.
+   */
   export type Arbitraries =
     | Array<Schema.Schema.Any | FC.Arbitrary<unknown>>
     | { [K in string]: Schema.Schema.Any | FC.Arbitrary<unknown> };
 
+  /**
+   * Tester for EffectDenoTest.
+   */
   export interface Tester<R> extends EffectDenoTest.Test<R> {
     skip: EffectDenoTest.Test<R>;
     skipIf: (condition: boolean) => EffectDenoTest.Test<R>;
@@ -70,6 +110,9 @@ export namespace EffectDenoTest {
     ) => void;
   }
 
+  /**
+   * Methods for non-live tests.
+   */
   export interface MethodsNonLive<R = never> extends API {
     readonly effect: EffectDenoTest.Tester<TestServices.TestServices | R>;
     readonly flakyTest: <A, E, R2>(
@@ -118,17 +161,32 @@ export namespace EffectDenoTest {
   }
 }
 
+/**
+ * Add equality testers.
+ */
 export const addEqualityTesters: () => void = internal.addEqualityTesters;
 
+/**
+ * Tester for EffectDenoTest.
+ */
 export const effect: EffectDenoTest.Tester<TestServices.TestServices> =
   internal.effect;
 
+/**
+ * Scoped tester for EffectDenoTest.
+ */
 export const scoped: EffectDenoTest.Tester<
   TestServices.TestServices | Scope.Scope
 > = internal.scoped;
 
+/**
+ * Live tester for EffectDenoTest.
+ */
 export const live: EffectDenoTest.Tester<never> = internal.live;
 
+/**
+ * Scoped live tester for EffectDenoTest.
+ */
 export const scopedLive: EffectDenoTest.Tester<Scope.Scope> =
   internal.scopedLive;
 
@@ -136,8 +194,9 @@ export const scopedLive: EffectDenoTest.Tester<Scope.Scope> =
  * Share a `Layer` between multiple tests, optionally wrapping
  * the tests in a `describe` block if a name is provided.
  *
+ * @example
  * ```ts
- * import { expect, layer } from "@effect/vitest"
+ * import { expect, layer } from "@totto/function/effect/test/deno";
  * import { Context, Effect, Layer } from "effect"
  *
  * class Foo extends Context.Tag("Foo")<Foo, "foo">() {
@@ -183,11 +242,17 @@ export const layer: <R, E>(
   (name: string, f: (it: EffectDenoTest.MethodsNonLive<R>) => void): void;
 } = internal.layer;
 
+/**
+ * Flaky test function.
+ */
 export const flakyTest: <A, E, R>(
   self: Effect.Effect<A, E, R>,
   timeout?: Duration.DurationInput,
 ) => Effect.Effect<A, never, R> = internal.flakyTest;
 
+/**
+ * Property test function.
+ */
 export const prop: EffectDenoTest.Methods["prop"] = internal.prop;
 
 /** @ignored */
@@ -201,13 +266,25 @@ const methods = {
   prop,
 } as const;
 
+/**
+ * Test methods for EffectDenoTest.
+ */
 export const test: EffectDenoTest.Methods = Object.assign(bdd.test, methods);
 
+/**
+ * Test function alias.
+ */
 export const it = test;
 
+/**
+ * Function to make methods for testing.
+ */
 export const makeMethods: (test: typeof bdd.test) => EffectDenoTest.Methods =
   internal.makeMethods;
 
+/**
+ * Wrapped describe function for tests.
+ */
 export const describeWrapped: (
   name: string,
   f: (it: EffectDenoTest.Methods) => void,

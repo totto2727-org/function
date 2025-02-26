@@ -1,6 +1,23 @@
+/**
+ * @module
+ *
+ * Converts Effect's `Exit` to a Option-t's `Result`.
+ *
+ * @example
+ * ```ts
+ * import { fromExit } from "@totto/function/option-t/effect";
+ *
+ * const result = fromExit(Exit.succeed("success"));
+ * // result: Result.Ok("success")
+ * ```
+ */
+
 import { type Cause, Exit, Function } from "../effect.ts";
 import { Result } from "../option-t.ts";
 
+/**
+ * Converts an Effect's `Exit` object into a Option-t's `Result` object.
+ */
 function fromExit_<OK, ERR_IN, ERR_OUT>(
   exit: Exit.Exit<OK, ERR_IN>,
   f: (value: Cause.Cause<ERR_IN>) => ERR_OUT,
@@ -12,6 +29,9 @@ function fromExit_<OK, ERR_IN, ERR_OUT>(
   }
 }
 
+/**
+ * Converts an Effect's `Exit` to a Option-t's `Result`, or returns a conversion function.
+ */
 export const fromExit: {
   <OK, ERR_IN, ERR_OUT>(
     exit: Exit.Exit<OK, ERR_IN>,

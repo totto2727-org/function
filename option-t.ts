@@ -1,3 +1,14 @@
+/**
+ * @module
+ *
+ * Re-exports of `option-t` modules.
+ *
+ * @example
+ * ```ts
+ * import { Result } from "@totto/function/option-t";
+ * ```
+ */
+
 export * from "npm:option-t@51.1.0";
 
 export { Nullable } from "npm:option-t@51.1.0/nullable/namespace";
