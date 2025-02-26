@@ -1,6 +1,4 @@
 /**
- * @module
- *
  * Converts Effect's `Exit` to a Option-t's `Result`.
  *
  * @example
@@ -10,6 +8,8 @@
  * const result = fromExit(Exit.succeed("success"));
  * // result: Result.Ok("success")
  * ```
+
+ * @module
  */
 
 import { type Cause, Exit, Function } from "../effect.ts";

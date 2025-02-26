@@ -1,6 +1,4 @@
 /**
- * @module
- *
  * Test utilities for Effect and Deno.
  *
  * Ignoring some Deno warnings due to test clock leaks.
@@ -14,6 +12,8 @@
  *   () => Effect.sync(() => expect(1).toEqual(1)),
  * );
  * ```
+ *
+ * @module
  */
 // deno-lint-ignore-file no-namespace
 import type {

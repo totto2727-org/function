@@ -1,4 +1,4 @@
-/*
+/**
  * This is a port of [neverthrow](https://github.com/supermacro/neverthrow)'s `safeUnwrap` and `safeTry` to [option-t](https://github.com/gcanti/option-t).
  *
  * https://github.com/supermacro/neverthrow/blob/master/src/result.ts
@@ -25,6 +25,8 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+
+ * @module
  */
 
 import { Result as R } from "../option-t.ts";
