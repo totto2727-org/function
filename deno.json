@@ -1,0 +1,37 @@
+{
+  "exports": {
+    "./effect": "./effect.ts",
+    "./effect/ai": "./effect/ai.ts",
+    "./effect/ai/anthropic": "./effect/ai/anthropic.ts",
+    "./effect/ai/openai": "./effect/ai/openai.ts",
+    "./effect/cli": "./effect/cli.ts",
+    "./effect/experimental/machine": "./effect/experimental/machine.ts",
+    "./effect/opentelemetry": "./effect/opentelemetry.ts",
+    "./effect/option-t": "./effect/option-t.ts",
+    "./effect/platform": "./effect/platform.ts",
+    "./effect/platform/browser": "./effect/platform/browser.ts",
+    "./effect/platform/bun": "./effect/platform/bun.ts",
+    "./effect/platform/node": "./effect/platform/node.ts",
+    "./effect/platform/node-share": "./effect/platform/node-share.ts",
+    "./effect/printer": "./effect/printer.ts",
+    "./effect/printer/ansi": "./effect/printer/ansi.ts",
+    "./effect/rpc": "./effect/rpc.ts",
+    "./effect/rpc/http": "./effect/rpc/http.ts",
+    "./effect/test/deno": "./effect/test/deno.ts",
+    "./effect/test/vitest": "./effect/test/vitest.ts",
+    "./effect/typeclass": "./effect/typeclass.ts",
+    "./option-t": "./option-t.ts",
+    "./option-t/effect": "./option-t/effect.ts",
+    "./option-t/safe-try": "./option-t/safe-try.ts"
+  },
+  "license": "MIT",
+  "lock": false,
+  "name": "@totto/function",
+  "tasks": {
+    "build": "deno publish --dry-run --allow-dirty",
+    "fix": "deno check **/*.ts && deno fmt && deno lint",
+    "test": "deno test **/*.test.ts",
+    "precommit": "deno task fix && deno task build && deno task test"
+  },
+  "version": "0.1.0"
+}
