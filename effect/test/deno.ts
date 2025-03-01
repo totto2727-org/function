@@ -19,7 +19,7 @@
 import type {
   Duration,
   Effect,
-  FastCheck as FC,
+  FastCheck,
   Layer,
   Schema,
   Scope,
@@ -71,8 +71,8 @@ export namespace EffectDenoTest {
    * Type for arbitrary values used in tests.
    */
   export type Arbitraries =
-    | Array<Schema.Schema.Any | FC.Arbitrary<unknown>>
-    | { [K in string]: Schema.Schema.Any | FC.Arbitrary<unknown> };
+    | Array<Schema.Schema.Any | FastCheck.Arbitrary<unknown>>
+    | { [K in string]: Schema.Schema.Any | FastCheck.Arbitrary<unknown> };
 
   /**
    * Tester for EffectDenoTest.
@@ -91,7 +91,7 @@ export namespace EffectDenoTest {
         R,
         [
           {
-            [K in keyof Arbs]: Arbs[K] extends FC.Arbitrary<infer T> ? T
+            [K in keyof Arbs]: Arbs[K] extends FastCheck.Arbitrary<infer T> ? T
               : Schema.Schema.Type<Arbs[K]>;
           },
           Deno.TestContext,
@@ -100,9 +100,10 @@ export namespace EffectDenoTest {
       timeout?:
         | number
         | {
-          fastCheck?: FC.Parameters<
+          fastCheck?: FastCheck.Parameters<
             {
-              [K in keyof Arbs]: Arbs[K] extends FC.Arbitrary<infer T> ? T
+              [K in keyof Arbs]: Arbs[K] extends FastCheck.Arbitrary<infer T>
+                ? T
                 : Schema.Schema.Type<Arbs[K]>;
             }
           >;
@@ -137,7 +138,7 @@ export namespace EffectDenoTest {
       arbitraries: Arbs,
       self: (
         properties: {
-          [K in keyof Arbs]: Arbs[K] extends FC.Arbitrary<infer T> ? T
+          [K in keyof Arbs]: Arbs[K] extends FastCheck.Arbitrary<infer T> ? T
             : Schema.Schema.Type<Arbs[K]>;
         },
         ctx: Deno.TestContext,
@@ -145,9 +146,10 @@ export namespace EffectDenoTest {
       timeout?:
         | number
         | {
-          fastCheck?: FC.Parameters<
+          fastCheck?: FastCheck.Parameters<
             {
-              [K in keyof Arbs]: Arbs[K] extends FC.Arbitrary<infer T> ? T
+              [K in keyof Arbs]: Arbs[K] extends FastCheck.Arbitrary<infer T>
+                ? T
                 : Schema.Schema.Type<Arbs[K]>;
             }
           >;
@@ -256,7 +258,29 @@ export const flakyTest: <A, E, R>(
 export const prop: EffectDenoTest.Methods["prop"] = internal.prop;
 
 /** @ignored */
-const methods = {
+const methods: {
+  readonly effect: EffectDenoTest.Tester<TestServices.TestServices>;
+  readonly live: EffectDenoTest.Tester<never>;
+  readonly flakyTest: <A, E, R>(
+    self: Effect.Effect<A, E, R>,
+    timeout?: Duration.DurationInput,
+  ) => Effect.Effect<A, never, R>;
+  readonly scoped: EffectDenoTest.Tester<
+    TestServices.TestServices | Scope.Scope
+  >;
+  readonly scopedLive: EffectDenoTest.Tester<Scope.Scope>;
+  readonly layer: <R, E>(
+    layer_: Layer.Layer<R, E>,
+    options?: {
+      readonly memoMap?: Layer.MemoMap;
+      readonly timeout?: Duration.DurationInput;
+    },
+  ) => {
+    (f: (it: EffectDenoTest.MethodsNonLive<R>) => void): void;
+    (name: string, f: (it: EffectDenoTest.MethodsNonLive<R>) => void): void;
+  };
+  readonly prop: EffectDenoTest.Methods["prop"];
+} = {
   effect,
   live,
   flakyTest,
@@ -264,7 +288,7 @@ const methods = {
   scopedLive,
   layer,
   prop,
-} as const;
+};
 
 /**
  * Test methods for EffectDenoTest.
