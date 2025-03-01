@@ -16,5 +16,7 @@ deno add @totto/function
 
 - Effect
   - deno-test
+  - option-t-bridge
 - Option-t
   - safe-try
+  - effect-bridge
