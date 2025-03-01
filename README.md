@@ -15,5 +15,6 @@ deno add @totto/function
 ## Packages
 
 - Effect
+  - deno-test
 - Option-t
   - safe-try
