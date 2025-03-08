@@ -34,5 +34,5 @@
     "precommit": "deno task fix && deno task build && deno task test",
     "test": "deno test **/*.test.ts"
   },
-  "version": "0.1.3"
+  "version": "1.0.0"
 }
