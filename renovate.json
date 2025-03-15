@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":timezone(Asia/Tokyo)",
+    "github>Omochice/renovate-config:deno"
+  ],
+  "labels": ["renovate", "deps"],
+  "commitMessagePrefix": "feat(deps): ",
+  "packageRules": [
+    {
+      "groupName": "Major updates",
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "groupName": "Minor updates",
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "groupName": "Patch updates",
+      "matchUpdateTypes": ["patch", "digest", "bump", "lockFileMaintenance"]
+    }
+  ]
+}
