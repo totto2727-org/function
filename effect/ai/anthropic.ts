@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/ai-anthropic@0.0.2";
+export * from "npm:@effect/ai-anthropic@0.2.1";
