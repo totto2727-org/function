@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/platform@0.77.2";
+export * from "npm:@effect/platform@0.79.1";

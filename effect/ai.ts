@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/ai@0.10.2";
+export * from "npm:@effect/ai@0.12.1";
