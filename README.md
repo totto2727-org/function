@@ -17,6 +17,12 @@ deno add @totto/function
 - Effect
   - deno-test
   - option-t-bridge
+  - @typed/id
 - Option-t
   - safe-try
   - effect-bridge
+- velona
+- type-fest
+- change-case
+- temporal
+- moize

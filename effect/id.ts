@@ -1,1 +1,1 @@
-export * from "npm:@typed/id@0.17.1"
+export * from "npm:@typed/id@0.17.1";
