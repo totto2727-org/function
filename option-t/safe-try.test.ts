@@ -26,7 +26,7 @@
  * SOFTWARE.
  */
 
-import { expect } from "jsr:@std/expect@1.0.4";
+import { expect } from "jsr:@std/expect@1.0.13";
 import { Result } from "../option-t.ts";
 import { safeTry, safeUnwrap } from "./safe-try.ts";
 

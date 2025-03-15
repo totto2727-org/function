@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/printer@0.41.2";
+export * from "npm:@effect/printer@0.41.10";
