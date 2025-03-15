@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/opentelemetry@0.44.2";
+export * from "npm:@effect/opentelemetry@0.44.10";
