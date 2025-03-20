@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/rpc-http@0.52.1";
+export * from "npm:@effect/rpc-http@0.52.4";
