@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/platform-bun@0.59.1";
+export * from "npm:@effect/platform-bun@0.77.0";

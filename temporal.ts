@@ -1,1 +1,1 @@
-export * from "npm:temporal-polyfill@0.2.5";
+export * from "npm:temporal-polyfill@0.3.0";
