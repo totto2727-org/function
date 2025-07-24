@@ -4,4 +4,4 @@
  * @module
  */
 
-export * from "npm:@effect/experimental@0.43.1";
+export * from "npm:@effect/experimental@0.54.0";
