@@ -1,7 +1,9 @@
 import {
+  Array,
   Effect,
   flow,
   Function,
+  Option,
   type Schema,
   type SchemaAST,
 } from "../effect.ts";
@@ -41,3 +43,9 @@ export type EffectFn<
   // deno-lint-ignore no-explicit-any
   RETURNED extends Effect.Effect<any, any, any>,
 > = (args: ARGS["Type"]) => RETURNED;
+
+export const nonEmptyArrayOrNone = <const T>(
+  args: T[],
+): Option.Option<Array.NonEmptyArray<T>> => {
+  return Array.isNonEmptyArray(args) ? Option.some(args) : Option.none();
+};
