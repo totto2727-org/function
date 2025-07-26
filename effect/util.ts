@@ -19,3 +19,8 @@ export const asVoidEffect: <ARGS extends unknown[]>(
 export type Create<S> = S extends Schema.Schema<infer A, infer I, never>
   ? (i: I, overrideOptions?: SchemaAST.ParseOptions) => A
   : never;
+
+export type To<
+  ARGS extends Schema.Schema<unknown, unknown, never>,
+  T,
+> = (args: ARGS) => T;
