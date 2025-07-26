@@ -34,3 +34,10 @@ export type EffectFnContext<
   // deno-lint-ignore no-explicit-any
   FN extends (...args: any[]) => Effect.Effect<any, any, any>,
 > = Effect.Effect.Context<ReturnType<FN>>;
+
+export type EffectFn<
+  // deno-lint-ignore no-explicit-any
+  ARGS extends Schema.Schema<any, any, never>,
+  // deno-lint-ignore no-explicit-any
+  RETURNED extends Effect.Effect<any, any, any>,
+> = (args: ARGS["Type"]) => RETURNED;
