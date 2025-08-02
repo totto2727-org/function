@@ -38,6 +38,15 @@ deno add jsr:@totto/function
 - **`di`** - Dependency injection utilities (velona)
 - **`test`** - Deno testing utilities
 
+### TypeScript Configurations
+
+- **`tsconfig/base`** - Base TypeScript configuration with strict settings
+- **`tsconfig/node22`** - Node.js 22 optimized configuration
+- **`tsconfig/node24`** - Node.js 24 optimized configuration
+- **`tsconfig/react`** - React/Vite optimized configuration
+- **`tsconfig/react-router`** - React Router/Remix optimized configuration
+- **`tsconfig/expo`** - Expo/React Native optimized configuration
+
 ## Usage
 
 ### Type-safe Option Handling
