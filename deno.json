@@ -35,6 +35,8 @@
     "./tsconfig/react": "./tsconfig/react.json",
     "./tsconfig/react-router": "./tsconfig/react-router.json",
     "./tsconfig/expo": "./tsconfig/expo.json",
+    "./biome/base": "./biome/base.json",
+    "./dprint/base": "./dprint/base.json",
     "./type": "./type.ts"
   },
   "license": "MIT",
