@@ -1,28 +1,53 @@
 # @totto/function
 
-A collection of functions and utilities.
+A comprehensive collection of TypeScript utilities and Effect ecosystem integrations, optimized for modern JavaScript runtimes including Deno, Node.js, Bun, and browsers.
 
 ## Installation
 
 ```bash
+# Using JSR
 npx jsr add @totto/function
-yarn dlx jsr add @totto/function
-pnpm dlx jsr add @totto/function
-nlx jsr add @totto/function
-deno add @totto/function
+yarn add jsr:@totto/function
+pnpm add jsr:@totto/function
+bun add @totto/function
+deno add jsr:@totto/function
 ```
 
-## Packages
+## Core Modules
 
-- Effect
-  - deno-test
-  - option-t-bridge
-  - @typed/id
-- Option-t
-  - safe-try
-  - effect-bridge
-- velona
-- type-fest
-- change-case
-- temporal
-- moize
+### Effect Ecosystem
+- **`effect`** - Core Effect library re-exports
+- **`effect/ai`** - AI integrations for Anthropic and OpenAI
+- **`effect/platform`** - Platform-specific implementations (Node.js, Bun, Browser)
+- **`effect/test`** - Enhanced testing utilities for Deno and Vitest
+- **`effect/rpc`** - Remote procedure call utilities
+- **`effect/printer`** - Console printing and ANSI utilities
+- **`effect/util`** - TypeScript type helpers and Effect utilities
+
+### Utility Libraries
+- **`type`** - Type-fest utilities for advanced TypeScript types
+- **`option-t`** - Option-t library with Effect bridge functionality
+- **`temporal`** - Temporal API utilities
+- **`memo`** - Memoization utilities (moize)
+- **`case`** - String case conversion utilities
+- **`di`** - Dependency injection utilities (velona)
+- **`test`** - Deno testing utilities
+
+## Usage
+
+### Type-safe Option Handling
+
+```typescript
+import { Option } from "@totto/function/option-t";
+import { pipe } from "@totto/function/effect";
+
+const result = pipe(
+  Option.some(42),
+  Option.map(x => x * 2),
+  Option.getOrElse(() => 0)
+);
+```
+
+## License
+
+MIT
