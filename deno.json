@@ -19,7 +19,6 @@
     "./effect/printer": "./effect/printer.ts",
     "./effect/printer/ansi": "./effect/printer/ansi.ts",
     "./effect/rpc": "./effect/rpc.ts",
-    "./effect/rpc/http": "./effect/rpc/http.ts",
     "./effect/test/deno": "./effect/test/deno.ts",
     "./effect/test/vitest": "./effect/test/vitest.ts",
     "./effect/typeclass": "./effect/typeclass.ts",
