@@ -30,6 +30,11 @@
     "./test": "./test.ts",
     "./temporal": "./temporal.ts",
     "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/node22": "./tsconfig/node22.json",
+    "./tsconfig/node24": "./tsconfig/node24.json",
+    "./tsconfig/react": "./tsconfig/react.json",
+    "./tsconfig/react-router": "./tsconfig/react-router.json",
+    "./tsconfig/expo": "./tsconfig/expo.json",
     "./type": "./type.ts"
   },
   "license": "MIT",

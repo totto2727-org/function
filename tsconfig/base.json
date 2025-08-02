@@ -3,6 +3,11 @@
   "extends": "@tsconfig/strictest",
   "compilerOptions": {
     "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedSideEffectImports": true,
+    "erasableSyntaxOnly": true,
+    "resolveJsonModule": true,
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
     "noUnusedLocals": false,

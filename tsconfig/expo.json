@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": ["react-native"],
+    "lib": [
+      "ES2019",
+      "ES2020.BigInt",
+      "ES2020.Date",
+      "ES2020.Number",
+      "ES2020.Promise",
+      "ES2020.String",
+      "ES2020.Symbol.WellKnown",
+      "ES2021.Promise",
+      "ES2021.String",
+      "ES2021.WeakRef",
+      "ES2022.Array",
+      "ES2022.Object",
+      "ES2022.String"
+    ],
+    "jsx": "react-native",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
+  ]
+}
