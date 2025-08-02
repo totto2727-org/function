@@ -46,10 +46,13 @@ Individual commands:
 
 ### Key Design Patterns
 
-1. **Re-export Strategy**: Each module provides external library re-exports + custom utilities
+1. **Re-export Strategy**: Each module provides external library re-exports +
+   custom utilities
 2. **JSR Support**: Explicit module publishing via `deno.json` exports
-3. **Effect Integration**: Bridge functionality between Effect library ecosystem and Option-t library
-4. **Test Isolation**: Effect-specific test utilities (including TestClock leak mitigation)
+3. **Effect Integration**: Bridge functionality between Effect library ecosystem
+   and Option-t library
+4. **Test Isolation**: Effect-specific test utilities (including TestClock leak
+   mitigation)
 
 ### Commit Conventions
 

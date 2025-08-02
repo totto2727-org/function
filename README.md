@@ -1,6 +1,8 @@
 # @totto/function
 
-A comprehensive collection of TypeScript utilities and Effect ecosystem integrations, optimized for modern JavaScript runtimes including Deno, Node.js, Bun, and browsers.
+A comprehensive collection of TypeScript utilities and Effect ecosystem
+integrations, optimized for modern JavaScript runtimes including Deno, Node.js,
+Bun, and browsers.
 
 ## Installation
 
@@ -16,15 +18,18 @@ deno add jsr:@totto/function
 ## Core Modules
 
 ### Effect Ecosystem
+
 - **`effect`** - Core Effect library re-exports
 - **`effect/ai`** - AI integrations for Anthropic and OpenAI
-- **`effect/platform`** - Platform-specific implementations (Node.js, Bun, Browser)
+- **`effect/platform`** - Platform-specific implementations (Node.js, Bun,
+  Browser)
 - **`effect/test`** - Enhanced testing utilities for Deno and Vitest
 - **`effect/rpc`** - Remote procedure call utilities
 - **`effect/printer`** - Console printing and ANSI utilities
 - **`effect/util`** - TypeScript type helpers and Effect utilities
 
 ### Utility Libraries
+
 - **`type`** - Type-fest utilities for advanced TypeScript types
 - **`option-t`** - Option-t library with Effect bridge functionality
 - **`temporal`** - Temporal API utilities
@@ -43,8 +48,8 @@ import { pipe } from "@totto/function/effect";
 
 const result = pipe(
   Option.some(42),
-  Option.map(x => x * 2),
-  Option.getOrElse(() => 0)
+  Option.map((x) => x * 2),
+  Option.getOrElse(() => 0),
 );
 ```
 
