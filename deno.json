@@ -29,6 +29,7 @@
     "./option-t/safe-try": "./option-t/safe-try.ts",
     "./test": "./test.ts",
     "./temporal": "./temporal.ts",
+    "./tsconfig/base": "./tsconfig/base.json",
     "./type": "./type.ts"
   },
   "license": "MIT",
