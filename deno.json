@@ -7,6 +7,7 @@
     "./effect/ai/anthropic": "./effect/ai/anthropic.ts",
     "./effect/ai/openai": "./effect/ai/openai.ts",
     "./effect/cli": "./effect/cli.ts",
+    "./effect/cluster": "./effect/cluster.ts",
     "./effect/experimental/machine": "./effect/experimental/machine.ts",
     "./effect/id": "./effect/id.ts",
     "./effect/opentelemetry": "./effect/opentelemetry.ts",
@@ -19,6 +20,7 @@
     "./effect/printer": "./effect/printer.ts",
     "./effect/printer/ansi": "./effect/printer/ansi.ts",
     "./effect/rpc": "./effect/rpc.ts",
+    "./effect/sql": "./effect/sql.ts",
     "./effect/test/deno": "./effect/test/deno.ts",
     "./effect/test/vitest": "./effect/test/vitest.ts",
     "./effect/typeclass": "./effect/typeclass.ts",
@@ -50,5 +52,5 @@
     "precommit": "deno task fix && deno task build && deno task test",
     "test": "deno test **/*.test.ts"
   },
-  "version": "1.5.1"
+  "version": "1.5.2"
 }
