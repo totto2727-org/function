@@ -25,6 +25,7 @@
     "./effect/test/vitest": "./effect/test/vitest.ts",
     "./effect/typeclass": "./effect/typeclass.ts",
     "./effect/util": "./effect/util.ts",
+    "./effect/workflow": "./effect/workflow.ts",
     "./memo": "./memo.ts",
     "./option-t": "./option-t.ts",
     "./option-t/effect": "./option-t/effect.ts",
@@ -52,5 +53,5 @@
     "precommit": "deno task fix && deno task build && deno task test",
     "test": "deno test **/*.test.ts"
   },
-  "version": "1.5.2"
+  "version": "1.5.4"
 }
