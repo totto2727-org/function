@@ -4,10 +4,10 @@
   "compilerOptions": {
     "lib": [
       "es2024",
-      "ES2024.Array",
-      "ES2024.Collection",
-      "ES2024.Iterator",
-      "ES2024.Promise"
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator",
+      "ESNext.Promise"
     ],
     "module": "node18",
     "target": "es2024",
