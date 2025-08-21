@@ -5,9 +5,9 @@
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "ESNext",
+    "module": "es2022",
     "moduleResolution": "bundler",
-    "target": "ES2019",
+    "target": "es2019",
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
