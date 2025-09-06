@@ -8,9 +8,6 @@
     "module": "es2022",
     "moduleResolution": "bundler",
     "target": "es2019",
-    "paths": {
-      "~/*": ["./app/*"]
-    },
     "rootDirs": [".", "./.react-router/types"]
   },
   "exclude": ["build"],
