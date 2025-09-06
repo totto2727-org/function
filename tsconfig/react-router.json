@@ -8,7 +8,6 @@
     "module": "es2022",
     "moduleResolution": "bundler",
     "target": "es2019",
-    "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     },
