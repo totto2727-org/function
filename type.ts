@@ -1,1 +1,1 @@
-export * from "npm:type-fest@4.41.0";
+export * from "npm:type-fest@5.0.1";
