@@ -9,9 +9,9 @@
  * @module
  */
 
-export * from "npm:option-t@54.5.1";
+export * from "npm:option-t@55.1.0";
 
-export { Nullable } from "npm:option-t@54.5.1/nullable/namespace";
-export { Maybe } from "npm:option-t@54.5.1/maybe/namespace";
-export { Undefinable } from "npm:option-t@54.5.1/undefinable/namespace";
-export { Result } from "npm:option-t@54.5.1/plain_result/namespace";
+export { Nullable } from "npm:option-t@55.1.0/nullable/namespace";
+export { Maybe } from "npm:option-t@55.1.0/maybe/namespace";
+export { Undefinable } from "npm:option-t@55.1.0/undefinable/namespace";
+export { Result } from "npm:option-t@55.1.0/plain_result/namespace";
