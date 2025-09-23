@@ -49,3 +49,14 @@ export const nonEmptyArrayOrNone = <const T>(
 ): Option.Option<Array.NonEmptyArray<T>> => {
   return Array.isNonEmptyArray(args) ? Option.some(args) : Option.none();
 };
+
+export function tap<const T extends ReadonlyArray<unknown>>(
+  fn: (v: Array.ReadonlyArray.Infer<T>) => void,
+): (vs: T) => T {
+  return (vs) => {
+    for (const v of vs) {
+      fn(v as Array.ReadonlyArray.Infer<T>);
+    }
+    return vs;
+  };
+}
