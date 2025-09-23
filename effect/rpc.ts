@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/rpc@0.69.1";
+export * from "npm:@effect/rpc@0.70.0";

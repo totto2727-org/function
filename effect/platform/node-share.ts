@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/platform-node-shared@0.49.0";
+export * from "npm:@effect/platform-node-shared@0.50.0";

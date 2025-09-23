@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/workflow@0.9.2";
+export * from "npm:@effect/workflow@0.10.0";
