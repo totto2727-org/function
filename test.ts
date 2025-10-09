@@ -10,5 +10,5 @@
  */
 
 export * from "jsr:@std/expect@1.0.17";
-export * from "jsr:@std/testing@1.0.15/bdd";
-export * from "jsr:@std/testing@1.0.15/unstable-bdd";
+export * from "jsr:@std/testing@1.0.16/bdd";
+export * from "jsr:@std/testing@1.0.16/unstable-bdd";
