@@ -30,14 +30,11 @@ export const CUIDProductionLive: Layer.Layer<
 );
 
 export function createCUIDProductionState(id: string): Layer.Layer<
-  CuidState | DateTimes | GetRandomValues,
-  never,
-  DateTimes | GetRandomValues
+  CuidState | DateTimes | GetRandomValues
 > {
-  return Layer.mergeAll(
-    CuidState.layer(id),
-    GetRandomValues.CryptoRandom,
-    DateTimes.Default,
+  return CuidState.layer(id).pipe(
+    Layer.provideMerge(GetRandomValues.CryptoRandom),
+    Layer.provideMerge(DateTimes.Default),
   );
 }
 
