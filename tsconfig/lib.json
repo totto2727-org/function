@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compileroptions": {
+    "allowjs": false,
+    "checkjs": false,
+    "declaration": true,
+    "declarationmap": true,
+    "isolateddeclarations": true
+  }
+}
