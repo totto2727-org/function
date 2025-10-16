@@ -4,7 +4,6 @@
     "allowjs": false,
     "checkjs": false,
     "declaration": true,
-    "declarationmap": true,
     "isolateddeclarations": true
   }
 }
