@@ -55,7 +55,7 @@
     "precommit": "deno task fix && deno task build && deno task test",
     "test": "deno test **/*.test.ts"
   },
-  "version": "1.7.2",
+  "version": "1.7.3",
   "lint": {
     "rules": {
       "exclude": ["no-import-prefix"]
