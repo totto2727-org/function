@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/cli@0.70.0";
+export * from "npm:@effect/cli@0.71.0";
