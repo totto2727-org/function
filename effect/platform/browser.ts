@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/platform-browser@0.71.0";
+export * from "npm:@effect/platform-browser@0.72.0";
