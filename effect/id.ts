@@ -1,16 +1,17 @@
-import {
-  Cuid,
-  CuidState,
-  DateTimes,
-  GetRandomValues,
-  makeCuid,
-} from "npm:@typed/id@0.17.2";
+import { Cuid } from "npm:@typed/id@0.17.2";
 import { Array, Context, Effect, Layer, Schema } from "../effect.ts";
 // @ts-types="npm:@types/seedrandom@3.0.8"
 import SR from "npm:seedrandom@3.0.5";
 import BaseX from "npm:base-x@5.0.1";
+import { createId } from "npm:@paralleldrive/cuid2@3.1.0";
 
-export * from "npm:@typed/id@0.17.2";
+export { Cuid } from "npm:@typed/id@0.17.2";
+export {
+  createId,
+  getConstants,
+  init,
+  isCuid,
+} from "npm:@paralleldrive/cuid2@3.1.0";
 
 const CUIDTagClass: Context.TagClass<
   CUID,
@@ -23,20 +24,11 @@ export class CUID extends CUIDTagClass {}
 export const CUIDProductionLive: Layer.Layer<
   CUID,
   never,
-  DateTimes | GetRandomValues | CuidState
-> = Layer.effect(
+  never
+> = Layer.succeed(
   CUID,
-  makeCuid,
+  Cuid.make(createId()),
 );
-
-export function createCUIDProductionState(id: string): Layer.Layer<
-  CuidState | DateTimes | GetRandomValues
-> {
-  return CuidState.layer(id).pipe(
-    Layer.provideMerge(GetRandomValues.CryptoRandom),
-    Layer.provideMerge(DateTimes.Default),
-  );
-}
 
 const CUIDSeedTagClass: Context.TagClass<
   CUIDSeed,
