@@ -1,4 +1,4 @@
-import { DurationFormat } from "npm:@formatjs/intl-durationformat@0.7.4";
+import { DurationFormat } from "npm:@formatjs/intl-durationformat@0.7.6";
 import { Array, Data, DateTime, Duration, HashMap, Option } from "./effect.ts";
 
 const shortFormatterHashMap = HashMap.empty<
