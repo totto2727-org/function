@@ -1,3 +1,8 @@
+/**
+ * @module
+ *
+ * @deprecated Use `@totto/function/effect/cuid` instead.
+ */
 import { Cuid } from "npm:@typed/id@0.17.2";
 import { Array, Context, Effect, Layer, Schema } from "../effect.ts";
 // @ts-types="npm:@types/seedrandom@3.0.8"
