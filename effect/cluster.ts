@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/cluster@0.49.0";
+export * from "npm:@effect/cluster@0.50.6";
