@@ -1,4 +1,4 @@
-import { String } from "npm:effect@3.17.14";
+import { String } from "npm:effect@3.18.4";
 import { expect } from "../test.ts";
 import { Array, Effect } from "../effect.ts";
 import * as CUID from "./cuid.ts";

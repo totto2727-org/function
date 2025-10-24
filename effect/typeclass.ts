@@ -9,4 +9,4 @@
  * @module
  */
 
-export * from "npm:@effect/typeclass@0.36.0";
+export * from "npm:@effect/typeclass@0.37.0";
