@@ -1,45 +1,32 @@
 import { String } from "npm:effect@3.17.14";
-import {
-  bufToBigInt,
-  createCounter,
-  createFingerprint,
-  getDefaultConstants,
-  init,
-  isCUID,
-} from "./cuid.ts";
 import { expect } from "../test.ts";
 import { Array, Effect } from "../effect.ts";
-import {
-  createCUIDSeed,
-  CUID,
-  CUIDProductionLive,
-  CUIDTestLive,
-} from "./id.ts";
+import * as CUID from "./cuid.ts";
 
-Deno.test("CUIDProductionLive", () => {
+Deno.test("generatorProductionLive", () => {
   Effect.gen(function* () {
-    const makeCUID = yield* CUID;
+    const makeCUID = yield* CUID.Generator;
 
     expect(makeCUID()).not.toBe(makeCUID());
-  }).pipe(Effect.provide(CUIDProductionLive), Effect.runSync);
+  }).pipe(Effect.provide(CUID.generatorProductionLive), Effect.runSync);
 });
 
-Deno.test("CUIDTestLive", async (t) => {
+Deno.test("generatorTestLive", async (t) => {
   await t.step("Fixed", () => {
     Effect.gen(function* () {
-      const makeCUID = yield* CUID;
+      const makeCUID = yield* CUID.Generator;
 
       expect(makeCUID()).toBe("gk1pfmhav2vkvudlk25qrot8");
     }).pipe(
-      Effect.provide(CUIDTestLive),
-      Effect.provide(createCUIDSeed("test")),
+      Effect.provide(CUID.generatorTestLive),
+      Effect.provide(CUID.createSeed("test")),
       Effect.runSync,
     );
   });
 
   await t.step("Snapshot", () => {
     Effect.gen(function* () {
-      const makeCUID = yield* CUID;
+      const makeCUID = yield* CUID.Generator;
       const actual = Array.makeBy(10, () => makeCUID());
 
       expect(actual).toEqual(
@@ -57,8 +44,8 @@ Deno.test("CUIDTestLive", async (t) => {
         ],
       );
     }).pipe(
-      Effect.provide(CUIDTestLive),
-      Effect.provide(createCUIDSeed("test")),
+      Effect.provide(CUID.generatorTestLive),
+      Effect.provide(CUID.createSeed("test")),
       Effect.runSync,
     );
   });
@@ -66,45 +53,45 @@ Deno.test("CUIDTestLive", async (t) => {
 
 Deno.test("Cuid2", async (t) => {
   await t.step("cuid is string", () => {
-    const id = init()();
+    const id = CUID.init()();
 
     expect(String.isString(id)).toBeTruthy();
   });
 
   await t.step("cuid has default length", () => {
-    const id = init()();
-    const defaultLength = getDefaultConstants().defaultLength;
+    const id = CUID.init()();
+    const defaultLength = CUID.getDefaultConstants().defaultLength;
 
     expect(id.length).toBe(defaultLength);
   });
 
   await t.step("cuid has custom length", () => {
-    const id = init({ length: 10 })();
+    const id = CUID.init({ length: 10 })();
 
     expect(id.length).toBe(10);
   });
 
   await t.step("cuid has large length", () => {
-    const id = init({ length: 32 })();
+    const id = CUID.init({ length: 32 })();
 
     expect(id.length).toBe(32);
   });
 
   await t.step("cuid has length greater than maximum (33)", () => {
-    expect(() => init({ length: 33 })()).toThrow(
+    expect(() => CUID.init({ length: 33 })()).toThrow(
       "Length must be between 2 and 32. Received: 33",
     );
   });
 
   await t.step("cuid has length much greater than maximum (100)", () => {
-    expect(() => init({ length: 100 })()).toThrow(
+    expect(() => CUID.init({ length: 100 })()).toThrow(
       "Length must be between 2 and 32. Received: 100",
     );
   });
 });
 
 Deno.test("createCounter", () => {
-  const counter = createCounter(10);
+  const counter = CUID.createCounter(10);
 
   expect([counter(), counter(), counter(), counter()]).toEqual([
     10,
@@ -116,24 +103,26 @@ Deno.test("createCounter", () => {
 
 Deno.test("bufToBigInt", async (t) => {
   await t.step("empty Uint8Array", () => {
-    expect(bufToBigInt(new Uint8Array(2)).toString()).toBe("0");
+    expect(CUID.bufToBigInt(new Uint8Array(2)).toString()).toBe("0");
   });
 
   await t.step("maximum value Uint8Array", () => {
-    expect(bufToBigInt(new Uint8Array([0xff, 0xff, 0xff, 0xff])).toString())
+    expect(
+      CUID.bufToBigInt(new Uint8Array([0xff, 0xff, 0xff, 0xff])).toString(),
+    )
       .toBe("4294967295");
   });
 });
 
 Deno.test("createFingerprint", async (t) => {
   await t.step("no arguments", () => {
-    const fingerprint = createFingerprint();
+    const fingerprint = CUID.createFingerprint();
 
     expect(fingerprint.length).toBeGreaterThanOrEqual(24);
   });
 
   await t.step("globalObj is empty object", () => {
-    const fingerprint = createFingerprint({ globalObj: {} });
+    const fingerprint = CUID.createFingerprint({ globalObj: {} });
 
     expect(fingerprint.length).toBeGreaterThanOrEqual(24);
   });
@@ -141,46 +130,48 @@ Deno.test("createFingerprint", async (t) => {
 
 Deno.test("isCuid", async (t) => {
   await t.step("valid cuid", () => {
-    expect(isCUID(init()())).toBe(true);
+    expect(CUID.is(CUID.init()())).toBe(true);
   });
 
   await t.step("cuid is too long", () => {
-    expect(isCUID(init()() + init()() + init()())).toBe(false);
+    expect(CUID.is(CUID.init()() + CUID.init()() + CUID.init()())).toBe(
+      false,
+    );
   });
 
   await t.step("cuid is empty string", () => {
-    expect(isCUID("")).toBe(false);
+    expect(CUID.is("")).toBe(false);
   });
 
   await t.step("cuid is non-CUID string", () => {
-    expect(isCUID("42")).toBe(false);
+    expect(CUID.is("42")).toBe(false);
   });
 
   await t.step("cuid is string with capital letters", () => {
-    expect(isCUID("aaaaDLL")).toBe(false);
+    expect(CUID.is("aaaaDLL")).toBe(false);
   });
 
   await t.step("cuid is valid CUID2 string", () => {
-    expect(isCUID("yi7rqj1trke")).toBe(true);
+    expect(CUID.is("yi7rqj1trke")).toBe(true);
   });
 
   await t.step("cuid is string with invalid characters", () => {
-    expect(isCUID("-x!ha")).toBe(false);
-    expect(isCUID("ab*%@#x")).toBe(false);
+    expect(CUID.is("-x!ha")).toBe(false);
+    expect(CUID.is("ab*%@#x")).toBe(false);
   });
 });
 
 Deno.test("CSPRNG", async (t) => {
   await t.step("multiple cuid2 calls", () => {
-    const id1 = init()();
-    const id2 = init()();
+    const id1 = CUID.init()();
+    const id2 = CUID.init()();
 
     expect(id1 !== id2).toBe(true);
   });
 
   await t.step("100 IDs generated with CSPRNG", () => {
-    const ids = Array.makeBy(100, () => init()());
-    const allValid = ids.every((id) => isCUID(id));
+    const ids = Array.makeBy(100, () => CUID.init()());
+    const allValid = ids.every((id) => CUID.is(id));
     const allUnique = new Set(ids).size === ids.length;
     expect(allValid && allUnique).toBe(true);
   });

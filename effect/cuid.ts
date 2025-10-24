@@ -14,8 +14,6 @@ import type { ParseOptions } from "npm:effect@3.17.14/SchemaAST";
 const defaultLength = 24;
 const bigLength = 32;
 
-export const getDefaultConstants = () => ({ defaultLength, bigLength });
-
 export const schema: Schema.brand<
   Schema.filter<Schema.filter<Schema.filter<typeof Schema.String>>>,
   "@totto/function/effect/cuid/Cuid"
@@ -28,31 +26,38 @@ export const schema: Schema.brand<
 
 export type CUID = typeof schema.Type;
 
-export const isCUID: (
-  u: unknown,
+export const is: (
+  value: unknown,
   overrideOptions?: ParseOptions | number,
-) => u is CUID = Schema.is(
+) => value is CUID = Schema.is(
   schema,
 );
 
 const decodeSync = Schema.decodeSync(schema);
 
-const createRandom = () => {
+export function getDefaultConstants(): {
+  defaultLength: number;
+  bigLength: number;
+} {
+  return { defaultLength, bigLength };
+}
+
+function createRandom(): number {
   // Generate a random 32-bit unsigned integer
   const buffer = new Uint32Array(1);
   globalThis.crypto.getRandomValues(buffer);
   // Convert to a float in [0, 1) by dividing by 2^32
   return buffer[0] / 0x100000000;
-};
+}
 
-const createEntropy = (length = 4, random = createRandom) => {
+function createEntropy(length = 4, random = createRandom): string {
   let entropy = "";
 
   while (entropy.length < length) {
     entropy = entropy + Math.floor(random() * 36).toString(36);
   }
   return entropy;
-};
+}
 
 /*
  * Adapted from https://github.com/juanelas/bigint-conversion
@@ -68,41 +73,44 @@ export function bufToBigInt(buf: Uint8Array): BigNumber {
   return value;
 }
 
-const hash = (input = "") => {
+function hash(input: string): string {
   // Drop the first character because it will bias the histogram
   // to the left.
   const encoder = new TextEncoder();
   return bufToBigInt(sha3_512(encoder.encode(input)))
     .toString(36)
     .slice(1);
-};
+}
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-const randomLetter = (rand: () => number) =>
-  alphabet[Math.floor(rand() * alphabet.length)];
-
+function randomLetter(rand: () => number): string {
+  return alphabet[Math.floor(rand() * alphabet.length)];
+}
 /*
 This is a fingerprint of the host environment. It is used to help
 prevent collisions when generating ids in a distributed system.
 If no global object is available, you can pass in your own, or fall back
 on a random string.
 */
-export const createFingerprint = ({
+export function createFingerprint({
   globalObj = typeof globalThis !== "undefined"
     ? globalThis
     : typeof window !== "undefined"
     ? window
     : {},
   random = createRandom,
-} = {}): string => {
+}: {
+  globalObj?: Record<string, unknown>;
+  random?: () => number;
+} = {}): string {
   const globals = Object.keys(globalObj).toString();
   const sourceString = globals.length
     ? globals + createEntropy(bigLength, random)
     : createEntropy(bigLength, random);
 
   return hash(sourceString).substring(0, bigLength);
-};
+}
 
 export function createCounter(count: number): () => number {
   return () => {
@@ -146,42 +154,42 @@ export function init({
   };
 }
 
-const CUIDGeneratorClass: Context.TagClass<
-  CUIDGenerator,
-  "@totto/function/effect/cuid/CUIDGenerator",
+const GeneratorClass: Context.TagClass<
+  Generator,
+  "@totto/function/effect/cuid/Generator",
   () => typeof schema.Type
-> = Context.Tag("@totto/function/effect/cuid/CUIDGenerator")();
+> = Context.Tag("@totto/function/effect/cuid/Generator")();
 
-export class CUIDGenerator extends CUIDGeneratorClass {}
+export class Generator extends GeneratorClass {}
 
-export const CUIDProductionLive: Layer.Layer<
-  CUIDGenerator,
+export const generatorProductionLive: Layer.Layer<
+  Generator,
   never,
   never
 > = Layer.effect(
-  CUIDGenerator,
+  Generator,
   // deno-lint-ignore require-yield
   Effect.gen(function* () {
     return init();
   }),
 );
 
-const CUIDSeedTagClass: Context.TagClass<
-  CUIDSeed,
-  "CUIDSeed",
+const SeedClass: Context.TagClass<
+  Seed,
+  "@totto/function/effect/cuid/Seed",
   SR.PRNG
-> = Context.Tag("CUIDSeed")();
+> = Context.Tag("@totto/function/effect/cuid/Seed")();
 
-export class CUIDSeed extends CUIDSeedTagClass {}
+export class Seed extends SeedClass {}
 
 const base26 = BaseX("abcdefghijklmnopqrstuvwxyz");
 const base36 = BaseX("0123456789abcdefghijklmnopqrstuvwxyz");
 
-export const CUIDTestLive: Layer.Layer<CUIDGenerator, never, CUIDSeed> = Layer
+export const generatorTestLive: Layer.Layer<Generator, never, Seed> = Layer
   .effect(
-    CUIDGenerator,
+    Generator,
     Effect.gen(function* () {
-      const seed = yield* CUIDSeed;
+      const seed = yield* Seed;
       return () => {
         const [r, ...rArray] = Array.makeBy(20, () => seed.int32());
         return decodeSync(
@@ -195,11 +203,11 @@ export const CUIDTestLive: Layer.Layer<CUIDGenerator, never, CUIDSeed> = Layer
     }),
   );
 
-export function createCUIDSeed(
+export function createSeed(
   seed: string,
-): Layer.Layer<CUIDSeed, never, never> {
+): Layer.Layer<Seed, never, never> {
   return Layer.succeed(
-    CUIDSeed,
-    CUIDSeed.of(SR(seed)),
+    Seed,
+    Seed.of(SR(seed)),
   );
 }
