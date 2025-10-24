@@ -1,13 +1,17 @@
 {
   "exports": {
+    "./biome/base": "./biome/base.json",
     "./case": "./case.ts",
     "./di": "./di.ts",
+    "./dprint/base": "./dprint/base.json",
+    "./duration": "./duraton.ts",
     "./effect": "./effect.ts",
     "./effect/ai": "./effect/ai.ts",
     "./effect/ai/anthropic": "./effect/ai/anthropic.ts",
     "./effect/ai/openai": "./effect/ai/openai.ts",
     "./effect/cli": "./effect/cli.ts",
     "./effect/cluster": "./effect/cluster.ts",
+    "./effect/cuid": "./effect/cuid.ts",
     "./effect/experimental/machine": "./effect/experimental/machine.ts",
     "./effect/id": "./effect/id.ts",
     "./effect/opentelemetry": "./effect/opentelemetry.ts",
@@ -30,23 +34,27 @@
     "./option-t": "./option-t.ts",
     "./option-t/effect": "./option-t/effect.ts",
     "./option-t/safe-try": "./option-t/safe-try.ts",
-    "./test": "./test.ts",
     "./temporal": "./temporal.ts",
+    "./test": "./test.ts",
     "./tsconfig": "./tsconfig/dep.ts",
     "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/expo": "./tsconfig/expo.json",
+    "./tsconfig/lib": "./tsconfig/lib.json",
     "./tsconfig/node22": "./tsconfig/node22.json",
     "./tsconfig/node24": "./tsconfig/node24.json",
     "./tsconfig/react": "./tsconfig/react.json",
     "./tsconfig/react-router": "./tsconfig/react-router.json",
-    "./tsconfig/expo": "./tsconfig/expo.json",
-    "./tsconfig/lib": "./tsconfig/lib.json",
     "./tsconfig/tanstack-start": "./tsconfig/tanstack-start.json",
-    "./biome/base": "./biome/base.json",
-    "./dprint/base": "./dprint/base.json",
-    "./type": "./type.ts",
-    "./duration": "./duraton.ts"
+    "./type": "./type.ts"
   },
   "license": "MIT",
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-import-prefix"
+      ]
+    }
+  },
   "lock": false,
   "name": "@totto/function",
   "tasks": {
@@ -55,10 +63,5 @@
     "precommit": "deno task fix && deno task build && deno task test",
     "test": "deno test **/*.test.ts"
   },
-  "version": "2.1.2",
-  "lint": {
-    "rules": {
-      "exclude": ["no-import-prefix"]
-    }
-  }
+  "version": "2.2.0"
 }
