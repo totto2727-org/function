@@ -3,7 +3,7 @@ import { Array, Context, Effect, Layer, Schema } from "../effect.ts";
 // @ts-types="npm:@types/seedrandom@3.0.8"
 import SR from "npm:seedrandom@3.0.5";
 import BaseX from "npm:base-x@5.0.1";
-import { createId } from "npm:@paralleldrive/cuid2@3.1.0";
+import { init } from "npm:@paralleldrive/cuid2@3.1.0";
 
 export { Cuid } from "npm:@typed/id@0.17.2";
 export {
@@ -29,6 +29,7 @@ export const CUIDProductionLive: Layer.Layer<
   CUID,
   // deno-lint-ignore require-yield
   Effect.gen(function* () {
+    const createId = init();
     return () => Cuid.make(createId());
   }),
 );
