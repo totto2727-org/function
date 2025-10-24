@@ -7,7 +7,7 @@ Deno.test("generatorProductionLive", () => {
   Effect.gen(function* () {
     const makeCUID = yield* CUID.Generator;
 
-    expect(makeCUID()).not.toBe(makeCUID());
+    expect(yield* makeCUID).not.toBe(yield* makeCUID);
   }).pipe(Effect.provide(CUID.generatorProductionLive), Effect.runSync);
 });
 
@@ -16,7 +16,7 @@ Deno.test("generatorTestLive", async (t) => {
     Effect.gen(function* () {
       const makeCUID = yield* CUID.Generator;
 
-      expect(makeCUID()).toBe("gk1pfmhav2vkvudlk25qrot8");
+      expect(yield* makeCUID).toBe("gk1pfmhav2vkvudlk25qrot8");
     }).pipe(
       Effect.provide(CUID.generatorTestLive),
       Effect.provide(CUID.createSeed("test")),
@@ -27,7 +27,7 @@ Deno.test("generatorTestLive", async (t) => {
   await t.step("Snapshot", () => {
     Effect.gen(function* () {
       const makeCUID = yield* CUID.Generator;
-      const actual = Array.makeBy(10, () => makeCUID());
+      const actual = Array.makeBy(10, () => makeCUID.pipe(Effect.runSync));
 
       expect(actual).toEqual(
         [

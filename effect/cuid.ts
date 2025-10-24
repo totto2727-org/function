@@ -157,7 +157,7 @@ export function init({
 const GeneratorClass: Context.TagClass<
   Generator,
   "@totto/function/effect/cuid/Generator",
-  () => typeof schema.Type
+  Effect.Effect<typeof schema.Type>
 > = Context.Tag("@totto/function/effect/cuid/Generator")();
 
 export class Generator extends GeneratorClass {}
@@ -170,7 +170,14 @@ export const generatorProductionLive: Layer.Layer<
   Generator,
   // deno-lint-ignore require-yield
   Effect.gen(function* () {
-    return init();
+    let createId: () => CUID;
+    // deno-lint-ignore require-yield
+    return Effect.gen(function* () {
+      if (!createId) {
+        createId = init();
+      }
+      return createId();
+    });
   }),
 );
 
@@ -190,7 +197,8 @@ export const generatorTestLive: Layer.Layer<Generator, never, Seed> = Layer
     Generator,
     Effect.gen(function* () {
       const seed = yield* Seed;
-      return () => {
+      // deno-lint-ignore require-yield
+      return Effect.gen(function* () {
         const [r, ...rArray] = Array.makeBy(20, () => seed.int32());
         return decodeSync(
           `${base26.encode([r])}${base36.encode(rArray)}`.substring(0, 24)
@@ -199,7 +207,7 @@ export const generatorTestLive: Layer.Layer<Generator, never, Seed> = Layer
               "0",
             ),
         );
-      };
+      });
     }),
   );
 
