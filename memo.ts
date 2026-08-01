@@ -1,1 +1,1 @@
-export * from "npm:moize@6.1.6";
+export * from "npm:moize@6.1.7";
