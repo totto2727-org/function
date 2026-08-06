@@ -4,12 +4,12 @@
  * <https://github.com/paralleldrive/cuid2/blob/e2391a06836226249ed2ca1a287516d2c459dab7/LICENSE>
  * <https://github.com/paralleldrive/cuid2/blob/e2391a06836226249ed2ca1a287516d2c459dab7/src/index.js>
  */
-import { sha3_512 } from "npm:@noble/hashes@2.0.1/sha3.js";
+import { sha3_512 } from "npm:@noble/hashes@2.3.0/sha3.js";
 import BigNumber from "npm:bignumber.js@9.3.1";
-import { Array, Context, Effect, Layer, Schema } from "npm:effect@3.17.14";
+import { Array, Context, Effect, Layer, Schema } from "npm:effect@3.22.1";
 import SR from "npm:seedrandom@3.0.5";
 import BaseX from "npm:base-x@5.0.1";
-import type { ParseOptions } from "npm:effect@3.17.14/SchemaAST";
+import type { ParseOptions } from "npm:effect@3.22.1/SchemaAST";
 
 const defaultLength = 24;
 const bigLength = 32;
